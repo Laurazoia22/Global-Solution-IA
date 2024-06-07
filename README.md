@@ -1,35 +1,35 @@
 # Global-Solution-IA
 
-## Relatório Técnico: Previsão da Abundância de Resíduos Plásticos
+# Relatório Técnico: Previsão da Abundância de Resíduos Plásticos
 
-# Descrição do Problema
+## Descrição do Problema
 A proliferação de lixo plástico nos oceanos e praias representa uma grave ameaça ambiental, impactando negativamente a vida marinha e os ecossistemas costeiros. O objetivo deste desafio é desenvolver modelos de Machine Learning que possam prever a abundância de resíduos plásticos em diferentes locais com base em fatores geográficos, utilizando um dataset com dados de pedaços de micro plásticos por metro quadrado (KM2_pieces_plasticpolution), latitude e longitude.
 
-# Metodologia Utilizada
+## Metodologia Utilizada
 
-# Exploração dos Dados:
+### Exploração dos Dados:
 Visualização dos primeiros e últimos registros.
 Descrição estatística dos dados.
 Tamanho do conjunto de dados.
 
-# Visualização de Dados:
+### Visualização de Dados:
 Matriz de correlação.
 Gráfico de dispersão entre latitude e longitude.
 Gráfico de dispersão entre as variáveis.
 
-# Preparação dos Dados:
+### Preparação dos Dados:
 Separação dos dados de entrada (latitude e longitude) e de saída (quantidade de micro plásticos por metro quadrado).
 Divisão dos dados em conjuntos de treinamento e teste.
 
-# Modelagem:
+### Modelagem:
 Treinamento de um modelo KNeighborsClassifier (KNN) e de um modelo de Regressão Linear utilizando os métodos .fit e .predict.
 Avaliação dos modelos com métricas de erro.
 
-# Avaliação e Visualização dos Resultados:
+### Avaliação e Visualização dos Resultados:
 Cálculo do Erro Quadrático Médio (MSE), Raiz do Erro Quadrático Médio (RMSE) e Coeficiente de Determinação (R²).
 Criação de DataFrames para visualização das métricas.
 
-# Código para Otimização da Velocidade de Execução:
+### Código para Otimização da Velocidade de Execução:
 Implementação de um pipeline otimizado para a execução dos modelos.
 
 
@@ -39,20 +39,20 @@ Implementação de um pipeline otimizado para a execução dos modelos.
 
 Exploração dos Dados
 
-# Primeiros Registros:
+### Primeiros Registros:
 #visualizar os primeiros registros 
 dados.head()
 
-# Últimos Registros:
+### Últimos Registros:
 #visualizar os ultimos registros
 dados.tail()
 
-# Descrição dos Dados:
+### Descrição dos Dados:
 #estatisticas descritivas dos atributos
 dados.describe()
 
 
-# Visualização dos Dados
+### Visualização dos Dados
 Matriz de Correlação:
 
 corr_matrix = dados[['Pieces_KM2', 'Latitude', 'Longitude']].corr().round(4)
@@ -61,16 +61,16 @@ corr_matrix
 sns.heatmap(corr_matrix, annot=True, cmap="coolwarm", fmt=".2f")
 plt.show()
 
-# Gráfico de Dispersão (Latitude vs Longitude):
+### Gráfico de Dispersão (Latitude vs Longitude):
 Bax = sns.pairplot(dados, y_vars='Pieces_KM2', x_vars=['Latitude', 'Longitude'])
 Bax.fig.suptitle('Dispersion between variables', fontsize=14, y=1.05)
 Bax
 
 
 # Preparação dos Dados
-# Separação dos Dados de Entrada e Saída:
+## Separação dos Dados de Entrada e Saída:
 
-# Separação dos dados de entrada (FEATURES) e dados de saída (TARGET)
+### Separação dos dados de entrada (FEATURES) e dados de saída (TARGET)
  #X maiúsculo ----> features / variáveis independentes
 X = dados[['Latitude', 'Longitude']]
 
@@ -81,7 +81,7 @@ X.values
 #visualizando os tres primeiros e tres ultimos dados de y
 y.values
 
-# Divisão dos Dados em Conjuntos de Treinamento e Teste:
+### Divisão dos Dados em Conjuntos de Treinamento e Teste:
 #Separação de dados de treino e teste
 #X_treino, y_treino ----> para treinar o modelo com método .fit
 #X_teste ----> para gerar as previsões com método .predict
@@ -107,7 +107,7 @@ pd.DataFrame([MSE_2, RMSE_2, R2_2], ['MSE', 'RMSE', 'R²'], columns=['KNN'])
 
 
 
-# Otimização da Velocidade de Execução
+## Otimização da Velocidade de Execução
 Para otimizar a velocidade de execução dos modelos, implementamos um pipeline que divide o conjunto de dados em treinamento e teste, treina dois modelos diferentes com os dados de treinamento e gera previsões nos dados de teste.
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 knn_model.fit(X_train, y_train)
